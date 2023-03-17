@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus</title>
+    <!-- for favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/9363/9363038.png">
+    <!-- noty js links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   
+
+
+    <style>
+        .collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  /* padding: 18px; */
+  width: 85%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  padding:20px;
+  text-transform: capitalize;
+  font-family: 'Pangolin', cursive;
+
+}
+.item{
+  margin:10px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+  width:80%;
+}
+.item{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1rem;
+}
+</style>
+    <link rel="stylesheet" href="/css/adminEmployeeProf.css">
+</head>
+<body>
+
+  <section class="component">
+
+    
+      <div class="name">
+            <h1><%= employee.name  %> </h1>
+      </div>
+
+      <div class="controlls">
+
+        <div class="item">
+          <button type="button" class="collapsible" >assign a feedback Task</button>
+            <div class="content">
+
+              <form action="/admin/Employee_as_Reviewer/<%= employee._id %> " method="post" style="text-align: justify;">
+                <label for="employee">Assign an Employee for review</label><br><br>
+                <% for(emp of all_emp){ %>
+                  <% if(emp.email !=employee.email){ %> 
+                    
+                    <input type="checkbox" id="<%= emp.name  %> " name="name" value="<%= emp.email %>">
+                    <label for="<%= emp.name  %> ">Name:<%= emp.name %>&nbsp; &nbsp;  </label><br>
+                    <span>Email: <%= emp.email  %> </span><br><br>
+                    
+                  <% } %> 
+                <% } %> 
+                <input type="submit"  class="button-25" role="button" value="Assign Task" style="margin: 10px; width: 40%; margin: auto;" >
+              </form>
+              
+            </div>
+          </div>
+          <div class="item">
+          <button type="button" class="collapsible">update employee details</button>
+            <div class="content">
+              <form action="/admin/updateEmployee/<%= employee._id  %> " method="post" style="text-align: justify;">
+                <label for="designation">Designation</label>
+                
+                <select name="designation" id="position">
+                  <option value="Manager">Manager</option>
+                  <option value="Receptionist">Receptionist</option>
+                  <option value="Assistant">Assistant</option>
+                  <option value="Website Developer">Web Developer</option>
+                  <option value="Application Developer">App Developer</option>
+                  <option value="Instructor">Instructor</option>
+                  <option value="software Developer">software Developer</option>
+                  <option value="Quality Analyst">Quality Analyst</option>
+                  <option value=" Program analyst">Program analyst</option>
+                  <option value="System administrator">System administrator</option>
+                  <option value="Junior Java developer">Junior Java developer</option>
+                </select>
+
+                <br><br>
+                
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone">
+
+                <br><br>
+                
+                <% if(emp.is_admin){  %> 
+                <label for="isAdmin">you want to remove <%= employee.name   %> as an admin </label> 
+
+                <input type="checkbox" name="isAdmin" id="no" value="no">
+                <label for="no">no</label>
+                
+                <% } else { %> 
+                  <label for="isAdmin">you want to make <%= employee.name   %> as an admin </label> 
+                  <input type="checkbox" name="isAdmin" id="yes" value="yes">
+                  <label for="yes">yes</label>
+                  
+
+                <%}  %> 
+                 
+
+                <br><br>
+
+                <label for="removeEmployee">you want to remove <%= employee.name   %> from company </label> 
+
+                <input type="radio" name="removeEmployee" id="yes" value="yes">
+                <label for="yes">yes</label>
+                <input type="radio" name="removeEmployee" id="no" value="no">
+                <label for="no">No</label>
+
+                <br><br>
+
+
+
+
+                <input type="submit"  class="button-25" role="button" value="Update Details" style="margin: 10px; width: 40%; margin: auto;" >
+
+              </form>
+            </div>
+          </div>
+
+
+      
+  </div>
+  
+
+
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          } 
+        });
+      }
+</script>
+
+<!-- for flash messages -->
+<script>
+  <% if (flash.success && flash.success.length > 0) {%>
+      new Noty({
+          theme: 'relax',
+          text: "<%= flash.success %>",
+          type: 'success',
+          layout: 'topRight',
+          timeout: 1500
+          
+      }).show();    
+  <%} %>
+
+  <% if (flash.error && flash.error.length > 0) {%>
+      new Noty({
+          theme: 'relax',
+          text: "<%= flash.error %>",
+          type: 'error',
+          layout: 'topRight',
+          timeout: 1500
+          
+      }).show();    
+  <%} %>
+</script>
+   
+</body>
+</html>
+
+<!--  sun ab tuje sbse pehle in teeno ka form bnane h inke routes controller set krne h then ->>-- -->
+<!-- fir employee valye part ka kaam h ==> emplyee dashboard bnana h with all employee controlls and then=> -->
+<!-- employee controlls is ki jb vi dashboard pr aave to use review pending vale deekhe then review submit krne ke baad history me usne kiko kya review diya h vo deekhs  -->
+<!-- ab dekh ye review h vo admin ko vi deekhna chahiya ki kisna kisko kya review diya  -->
+<!-- or admin kisiko bhi admin bna skta h to  uska bhi krna h-->
+
+<!-- HTML !-->
+

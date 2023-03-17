@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus</title>
+    <!-- for favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/9363/9363038.png">
+    <!-- noty js links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   
+
+
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
+    rel="stylesheet"
+    />
+</head>
+<body>
+  <% if(reviews!=null){ %> 
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>Given By</th>
+          <th>Given for</th>
+          <th>Feedback</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i of reviews){ %> 
+
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              <img
+                  src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
+                  alt=""
+                  style="width: 45px; height: 45px"
+                  class="rounded-circle"
+                  />
+              <div class="ms-3">
+                <p class="fw-bold mb-1" style="text-transform: uppercase;"><%= i.reviewBy.name  %> </p>
+                
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1"><%= i.reviewFor.name  %> </p>
+            
+          </td>
+         
+          <td><%= i.feedback  %> </td>
+         
+        </tr>
+      <% } %> 
+       
+      </tbody>
+    </table>
+    
+      <% }else{ %> 
+        <h1 style="text-align: center;"> No feedbacks has been given by employees</h1>
+<% } %> 
+      <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"
+    ></script>
+
+
+    <!-- for flash messages -->
+    <script>
+      <% if (flash.success && flash.success.length > 0) {%>
+          new Noty({
+              theme: 'relax',
+              text: "<%= flash.success %>",
+              type: 'success',
+              layout: 'topRight',
+              timeout: 1500
+              
+          }).show();    
+      <%} %>
+
+      <% if (flash.error && flash.error.length > 0) {%>
+          new Noty({
+              theme: 'relax',
+              text: "<%= flash.error %>",
+              type: 'error',
+              layout: 'topRight',
+              timeout: 1500
+              
+          }).show();    
+      <%} %>
+  </script>
+</body>
+</html>

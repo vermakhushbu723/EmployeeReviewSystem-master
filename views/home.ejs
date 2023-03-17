@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- noty js links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/home.css">
+   
+    <title>Lotus</title>
+    <!-- for favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/9363/9363038.png">
+</head>
+<body>
+
+    <div class="home">
+
+        <section id="welcome">
+
+           
+                <div class="text">
+                <img src="https://cdn-icons-png.flaticon.com/512/5545/5545101.png" style="height: 120px; width: 120px; margin: 25px;">
+                <h1>WELCoME</h1>
+                </div>
+
+                <!-- <div class="controlls container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2405/2405283.png" style="height: 120px; width: 120px; " class="image">
+                    <div class="middle">
+                        <div class="text">Employee</div>
+                    </div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1071/1071942.png" style="height: 120px; width: 120px; " class="image">
+                    <div class="middle">
+                        <div class="text1">Admin</div>
+                    </div>
+                </div> -->
+
+                <div class="controlls">
+                <div class="fullwrap">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2405/2405283.png"/>
+                    <div class="fullcap">
+                      Employee
+                      <br>
+                      <a href="/employee/login">Click!</a>
+                    </div>
+                </div>
+                <div class="fullwrap">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2345/2345337.png"/>
+                    <div class="fullcap">
+                    <span >
+                      Admin
+                    </span>
+                    <br>
+                      
+                      <a href="/admin/login"> Click!</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+        </section>
+        
+    </div>
+    <!-- MDB -->
+    <!-- for flash messages -->
+    <script>
+        <% if (flash.success && flash.success.length > 0) {%>
+            new Noty({
+                theme: 'relax',
+                text: "<%= flash.success %>",
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+                
+            }).show();    
+        <%} %>
+
+        <% if (flash.error && flash.error.length > 0) {%>
+            new Noty({
+                theme: 'relax',
+                text: "<%= flash.error %>",
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+                
+            }).show();    
+        <%} %>
+    </script>
+  
+</body>
+</html>
+
+ <!-- <h1> <a href="/admin/sign-up">admin</a></h1> -->
+    <!-- <h1> <a href="/employee/login">employee</a></h1> --> -->

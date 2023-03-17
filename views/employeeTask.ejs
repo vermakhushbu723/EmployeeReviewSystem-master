@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus</title>
+    <!-- for favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/9363/9363038.png">
+    <!-- noty js links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   
+</head>
+<body>
+
+    <ul style="display: flex; justify-content: space-around; flex-wrap: wrap; ">
+       <% if(employee.toReview.length==0){ %> 
+        <h1>No task assigned !!</h1>
+        <% } %> 
+    <% for(var e of employee.toReview){ %> 
+        
+        <li style="border:3px outset black; padding: 20px; list-style: none; border-radius: 10px; margin: 20px;">
+            <h3>Name:<%= e.name %> </h3>
+            <h3>Email:<%= e.email %> </h3>
+            <form action="/employee/feedback/<%= employee._id  %>/<%= e._id  %>  " method="post">
+
+                <textarea name="content" cols="40" rows="10" placeholder="Type Here..." required style="font-size: 20px;"></textarea>
+                <br><br>
+                <input type="submit" value="submit" style="margin: auto; padding: 8px 20px; background-color: aliceblue; font-size: 20px; text-transform: capitalize;">
+
+            </form>
+        </li>
+
+
+        <% } %> 
+    </ul>
+    
+    <!-- for flash messsages -->
+    <script>
+        <% if (flash.success && flash.success.length > 0) {%>
+            new Noty({
+                theme: 'relax',
+                text: "<%= flash.success %>",
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+                
+            }).show();    
+        <%} %>
+
+        <% if (flash.error && flash.error.length > 0) {%>
+            new Noty({
+                theme: 'relax',
+                text: "<%= flash.error %>",
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+                
+            }).show();    
+        <%} %>
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.employee{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background-color: #f8f8f8;
+    width:100%;
+}
+.employee .item{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    background-color:#c3975e;
+    width: 70%;
+}
+
+.employee .item div,a{
+    padding: 10px;
+    margin: 10px;
+}
+
+.employee .item:hover{
+    background-color:black;
+    color: white; 
+    
+}
